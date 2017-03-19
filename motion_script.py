@@ -7,9 +7,13 @@ import socket
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Use server IP and port number
+# (Replace SERVER IP with the IP address of the machine running this script)
 client_socket.connect(('SERVER IP', 5555))
 
 GPIO.setmode(GPIO.BCM)
+
+# Set PIR_PIN to whatever pin your PIR output wire is connected to on your Pi
+# (for me it is pin 7)
 PIR_PIN = 7 
 GPIO.setup(PIR_PIN, GPIO.IN)
 message = "Motion detected!"
