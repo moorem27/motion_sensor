@@ -29,7 +29,7 @@ while True:
             data = connection.recv(16)
 	    print >> sys.stderr, 'received "%s"' % data
             if data:
-                # This is assuming the current directory is /home/$USER
+                # This is assuming the current directory is /home/$USER/motion_sensor
                 p = vlc.MediaPlayer("file:///home/" + user + "/motion_sensor/incoming.mp3")
                 p.play()
 	    elif data == "":
