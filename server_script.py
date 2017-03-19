@@ -18,11 +18,6 @@ sock.bind(server_address)
 
 sock.listen(1)
 
-
-def func():
-    print "Called func()!"
-
-func()
 while True:
     print >>sys.stderr, 'waiting for a connection'
     connection, client_address = sock.accept()
