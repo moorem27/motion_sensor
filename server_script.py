@@ -1,7 +1,14 @@
 #!/usr/bin/python
 
+# Note: Make sure VLC is installed
+
+import vlc
 import socket
 import sys
+import getpass
+
+user = getpass.getuser()
+print user
 
 server_address = ('', 5555)
 
@@ -11,6 +18,11 @@ sock.bind(server_address)
 
 sock.listen(1)
 
+
+def func():
+    print "Called func()!"
+
+func()
 while True:
     print >>sys.stderr, 'waiting for a connection'
     connection, client_address = sock.accept()
@@ -21,10 +33,11 @@ while True:
 	while True:
             data = connection.recv(16)
 	    print >> sys.stderr, 'received "%s"' % data
-
-	    if data == "":
-	        break
-
+            if data:
+                p = vlc.MediaPlayer("file:///home/" + user + "/motion_sensor/incoming.mp3")
+                p.play()
+	    elif data == "":
+                break
 
 
     finally:
