@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-# Note: Make sure VLC is installed
-
 import vlc
 import socket
 import sys
@@ -18,8 +16,9 @@ sock.bind(server_address)
 
 sock.listen(1)
 
-while True:
-    print >>sys.stderr, 'waiting for a connection'
+connected = True
+while connected:
+    print >> sys.stderr, 'waiting for a connection'
     connection, client_address = sock.accept()
 
     try:
@@ -27,12 +26,14 @@ while True:
 
 	while True:
             data = connection.recv(16)
-	    print >> sys.stderr, 'received "%s"' % data
+
             if data:
-                # This is assuming the current directory is /home/$USER/motion_sensor
+		print >> sys.stderr, '%s' % data
                 p = vlc.MediaPlayer("file:///home/" + user + "/motion_sensor/incoming.mp3")
                 p.play()
 	    elif data == "":
+                print "Shutting down server"
+		connected = False
                 break
 
 
