@@ -7,7 +7,7 @@ import socket
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Use server IP and port number
-# (Replace SERVER IP with the IP address of the machine running this script)
+# (Replace SERVER IP with the IP address of the server)
 client_socket.connect(('SERVER IP', 5555))
 
 GPIO.setmode(GPIO.BCM)
@@ -18,6 +18,7 @@ PIR_PIN = 7
 GPIO.setup(PIR_PIN, GPIO.IN)
 message = "Motion detected!"
 
+# Callback function
 def MOTION(PIR_PIN):
     print message
     client_socket.send(message)
